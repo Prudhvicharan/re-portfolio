@@ -93,7 +93,7 @@ export const projects = [
     stack: ["Angular", "TypeScript", "Node.js", "MongoDB", "Redis", "Docker"],
     metrics: { headline: "1,200+ Students", sub: "7,000 institutions · 99.5% uptime" },
     github: "https://github.com/Prudhvicharan/launchmasters",
-    live: "https://launchmasters.vercel.app/login",
+    live: "https://launchmasters-prod.vercel.app/login",
     accentColor: "#FF9F1C",
     gradientFrom: "#FF9F1C20",
     gradientTo: "#FF450010",
