@@ -200,24 +200,7 @@ export default function Navbar() {
                 ))}
               </ul>
 
-              {/* Resume CTA at bottom */}
-              <div style={{ paddingTop: 20, borderTop: "1px solid rgba(168,178,200,0.07)", marginTop: 12 }}>
-                <a
-                  href="/assets/resume.pdf"
-                  download
-                  onClick={() => setMenuOpen(false)}
-                  style={{
-                    display: "block", width: "100%",
-                    fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 600,
-                    color: "#00E5FF", textAlign: "center",
-                    border: "1px solid rgba(0,229,255,0.3)", borderRadius: 10, padding: "14px",
-                    background: "rgba(0,229,255,0.05)", textDecoration: "none",
-                    letterSpacing: "0.1em", textTransform: "uppercase",
-                  }}
-                >
-                  Download Resume ↓
-                </a>
-              </div>
+
             </motion.div>
           </>
         )}

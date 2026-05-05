@@ -182,37 +182,6 @@ export default function Contact() {
               ))}
             </div>
 
-            {/* Animated envelope */}
-            <motion.div
-              whileHover="hover"
-              initial="rest"
-              style={{ alignSelf: "flex-start", marginTop: 8 }}
-            >
-              <svg width="80" height="60" viewBox="0 0 120 90" fill="none" style={{ overflow: "visible" }}>
-                <rect x="4" y="20" width="112" height="66" rx="8" stroke="rgba(0,229,255,0.5)" strokeWidth="2" fill="rgba(0,229,255,0.04)" />
-                <motion.path
-                  d="M4 20 L60 54 L116 20"
-                  stroke="rgba(0,229,255,0.5)" strokeWidth="2" fill="none"
-                  variants={{ hover: { d: "M4 20 L60 10 L116 20" }, rest: { d: "M4 20 L60 54 L116 20" } }}
-                  transition={{ duration: 0.3 }}
-                />
-                <motion.rect
-                  x="30" y="2" width="60" height="42" rx="4"
-                  fill="#0D1525" stroke="rgba(0,229,255,0.4)" strokeWidth="1.5"
-                  variants={{ hover: { y: -20, opacity: 1 }, rest: { y: 0, opacity: 0 } }}
-                  transition={{ duration: 0.3 }}
-                />
-                <motion.text
-                  x="60" y="26" textAnchor="middle" fontSize="7" fill="#00E5FF"
-                  fontFamily="JetBrains Mono, monospace" fontWeight="600"
-                  variants={{ hover: { opacity: 1, y: -18 }, rest: { opacity: 0, y: 0 } }}
-                  transition={{ duration: 0.3 }}
-                >
-                  Hi there! 👋
-                </motion.text>
-              </svg>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: 10, color: "var(--text-body)", opacity: 0.4, marginTop: 4 }}>Hover me</p>
-            </motion.div>
           </div>
 
           {/* Right: Message form */}

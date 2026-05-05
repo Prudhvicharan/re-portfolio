@@ -19,7 +19,7 @@ export default function About() {
     show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
-  const coreTechs = ["React", "Node.js", "OpenAI", "AWS", "TypeScript", "Docker", "LangChain", "PostgreSQL"];
+  const coreTechs = [".NET/C#", "Python", "T-SQL", "Azure", "Databricks", "React", "TypeScript", "Docker"];
 
   return (
     <SectionWrapper id="about">
@@ -126,7 +126,7 @@ export default function About() {
                 >
                   <div style={{ fontSize: 20, marginBottom: 8 }}>{stat.icon}</div>
                   <div style={{ fontFamily: "var(--font-accent)", color: "#00E5FF", fontSize: "clamp(1.1rem, 2vw, 1.6rem)", fontWeight: 700, lineHeight: 1 }}>
-                    {inView ? <CountUp end={stat.value} suffix={stat.suffix} /> : `0${stat.suffix}`}
+                    {inView ? <CountUp end={stat.value} suffix={stat.suffix} /> : (typeof stat.value === 'string' ? stat.value : `0${stat.suffix}`)}
                   </div>
                   <div style={{ fontFamily: "var(--font-body)", color: "#A8B2C8", fontSize: 10, marginTop: 6, lineHeight: 1.4 }}>{stat.label}</div>
                 </motion.div>

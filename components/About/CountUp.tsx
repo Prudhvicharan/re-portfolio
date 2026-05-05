@@ -11,21 +11,27 @@ export default function CountUp({
   suffix = "",
   duration = 1800,
 }: {
-  end: number;
+  end: number | string;
   suffix?: string;
   duration?: number;
 }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState<number | string>(typeof end === "string" ? end : 0);
   const frameRef = useRef<number>(0);
 
   useEffect(() => {
+    if (typeof end === "string") {
+      setCount(end);
+      return;
+    }
+
     const startTime = performance.now();
+    const endNum = end as number;
 
     const step = (now: number) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const eased = easeOutQuart(progress);
-      setCount(Math.round(eased * end * 10) / 10);
+      setCount(Math.round(eased * endNum * 10) / 10);
       if (progress < 1) {
         frameRef.current = requestAnimationFrame(step);
       }

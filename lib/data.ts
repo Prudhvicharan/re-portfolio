@@ -2,15 +2,15 @@ export const personal = {
   name: "Prudhvi Charan P",
   firstName: "PRUDHVI",
   lastName: "CHARAN",
-  title: "Senior Full-Stack AI Engineer",
+  title: "Senior Full-Stack Engineer",
   roles: [
     "Senior Full-Stack Engineer",
-    "AI Systems Architect",
-    "Cloud-Native Builder",
-    "Microservices Engineer",
+    "Azure Cloud Architect",
+    "Data Integration Specialist",
+    "Backend Developer",
   ],
-  bio: "I architect systems that scale to millions and ship AI features that actually solve real problems. Five years across healthcare, recruitment, and enterprise SaaS — from microfrontend ecosystems to OpenAI-powered pipelines running at 10M+ requests a month. I care about code that performs, teams that ship, and software that earns trust.",
-  email: "psprudhvicharan@gmail.com",
+  bio: "I architect and build enterprise-grade applications that scale to solve complex real-world problems. With deep expertise across .NET/C#, Python, and modern TypeScript ecosystems, I specialize in designing robust T-SQL data models, driving cloud integrations via Azure, and leveraging Databricks for intelligent ML pipelines. I care deeply about writing rigorously tested code, mentoring engineering teams, and ensuring production systems remain highly available and reliable.",
+  email: "bunnycharanprudhvi@gmail.com",
   phone: "816-762-8317",
   linkedin: "linkedin.com/in/prudhvi-charan",
   github: "github.com/Prudhvicharan",
@@ -20,53 +20,57 @@ export const personal = {
 export const stats = [
   { value: 5, suffix: "+", label: "Years Experience", icon: "⚡" },
   { value: 50, suffix: "K+", label: "Users Served", icon: "👥" },
-  { value: 10, suffix: "M+", label: "Monthly API Requests", icon: "🌐" },
+  { value: 15, suffix: "+", label: "Microservices", icon: "🌐" },
   { value: 99.9, suffix: "%", label: "Uptime Delivered", icon: "🔒" },
-  { value: 6, suffix: "", label: "AI Apps Shipped", icon: "🤖" },
-  { value: 45, suffix: "%", label: "Avg Efficiency Gains", icon: "📈" },
+  { value: 90, suffix: "%+", label: "ML Accuracy", icon: "🤖" },
+  { value: 95, suffix: "%+", label: "Test Coverage", icon: "✅" },
 ];
 
 export const experience = [
   {
-    role: "Senior Full-Stack AI Engineer",
+    role: "Senior Full Stack Engineer",
     company: "Akdene",
     location: "Remote",
     period: "March 2025 – Present",
     current: true,
     highlights: [
-      "Architected 6 enterprise AI-powered apps across healthcare & recruitment — 50K+ users, 99.9% uptime",
-      "Built OpenAI GPT-4 + LangChain resume parser → 45% less manual review, hiring cycles 3 weeks faster",
-      "Decomposed monoliths into 15+ microservices → 60% faster deployments, 50+ weekly production releases",
-      "10M+ monthly API requests at sub-100ms P95 latency using Redis caching and rate limiting",
-      "React/TypeScript migration from Angular → 35% developer productivity gain, 40% fewer bugs",
-      "Mentored 5 engineers → 30% team velocity improvement",
+      "Developed and configured enterprise-grade web applications of moderate-to-high complexity using .NET Core/C#, Python, JavaScript/TypeScript, and Node.js.",
+      "Designed and maintained T-SQL data models and schemas; authored rollback-safe migration scripts.",
+      "Built and maintained Azure Pipelines CI/CD workflows for automated build, test, and deployment.",
+      "Implemented Azure Service Bus as the messaging backbone for event-driven integrations.",
+      "Developed Python-based ML signal scoring workflows using Databricks, applying NLP classification.",
+      "Resolved tier 2 and 3 support issues across production applications; escalated complex incidents.",
+      "Authored unit and integration tests (Jest, xUnit, JUnit) achieving 90%+ code coverage; created QA documentation.",
+      "Effectively mentored 5 junior developers on data modeling, software configuration, and testing standards."
     ],
   },
   {
-    role: "Full-Stack Software Engineer",
+    role: "Senior Software Engineer",
     company: "Vitrana",
     location: "Bangalore, India",
     period: "June 2021 – December 2022",
     current: false,
     highlights: [
-      "Led HiLIT healthcare analytics platform — 5M+ adverse event records, 2,000+ global professionals",
-      "Microfrontend architecture across 7 enterprise apps → 35% faster builds, 50% better modularity",
-      ".NET Core APIs: 500K+ daily transactions at 99.95% uptime using CQRS + async patterns",
-      "AWS optimization → 35% cost reduction, 99.9% availability with auto-scaling",
-      "95% deployment success rate, zero-downtime blue-green releases via Jenkins + Docker",
+      "Led development of the HiLIT healthcare analytics platform using .NET Core/C# and SQL Server.",
+      "Integrated Azure Service Bus for event-driven messaging between 20+ RESTful microservice APIs.",
+      "Developed Python scripts for data ingestion, transformation, and reporting automation.",
+      "Executed T-SQL/SQL database schema migrations across distributed SQL Server services.",
+      "Achieved 95% unit and integration test coverage; independently authored test suites and deployment documentation.",
+      "Deployed and optimized cloud infrastructure (AWS and Azure) with auto-scaling configurations."
     ],
   },
   {
-    role: "Frontend Software Engineer",
+    role: "Software Engineer",
     company: "Vitrana",
     location: "Bangalore, India",
     period: "December 2019 – May 2021",
     current: false,
     highlights: [
-      "Built 60+ screen Angular enterprise dashboards navigating 100K+ medical terms",
-      "Redesigned MedDRA Dictionary → 60% search improvement, 50% faster data loads",
-      "30+ reusable Angular component library → 35% development time reduction across teams",
-      "Test coverage: 60% → 90% | Production bugs reduced by 35%",
+      "Developed large-scale Angular enterprise dashboards with complex routing and data visualization.",
+      "Redesigned MedDRA Dictionary application; optimized T-SQL queries and refactored legacy TypeScript codebase.",
+      "Configured Azure Pipelines CI/CD workflows; automated unit testing and integration testing.",
+      "Wrote Python automation scripts for data reporting and batch processing tasks.",
+      "Built 30+ reusable Angular component libraries using Angular Material and SCSS."
     ],
   },
 ];
@@ -76,9 +80,9 @@ export const projects = [
     name: "Career Axis",
     tagline: "AI-Powered Job Application Tracker",
     description:
-      "Full-stack platform integrating Gmail API + NLP classification to automate job application tracking with ML-based email categorization.",
-    stack: ["React", "TypeScript", "Node.js", "OpenAI API", "MongoDB", "Docker", "AWS"],
-    metrics: { headline: "90% ML Accuracy", sub: "500+ active users · 75% less manual effort" },
+      "Full-stack application integrating a Python-based NLP/ML classification pipeline with Gmail API across 8 job-signal categories.",
+    stack: ["Python", "C#/.NET", "Node.js", "React", "T-SQL/SQL", "Azure Pipelines", "Azure Service Bus", "Databricks"],
+    metrics: { headline: "Advanced Pipeline", sub: "Azure & Databricks Integrated" },
     github: "https://github.com/Prudhvicharan/career-axis",
     live: "https://prudhvicharan.github.io/Career-Axis/",
     accentColor: "#00E5FF",
@@ -89,9 +93,9 @@ export const projects = [
     name: "LaunchMasters",
     tagline: "College Application Management Platform",
     description:
-      "Comprehensive platform serving students with college research, application tracking, and deadline management across 7,000+ institutions.",
-    stack: ["Angular", "TypeScript", "Node.js", "MongoDB", "Redis", "Docker"],
-    metrics: { headline: "1,200+ Students", sub: "7,000 institutions · 99.5% uptime" },
+      "Full-stack platform with integrated external REST APIs, T-SQL/SQL data modeling, and Python scripts for data normalization.",
+    stack: ["Python", "Angular", "TypeScript", "T-SQL/SQL", "Node.js", "Azure Pipelines"],
+    metrics: { headline: "Enterprise Scale", sub: "T-SQL/SQL Schema-Driven" },
     github: "https://github.com/Prudhvicharan/launchmasters",
     live: "https://launchmasters-prod.vercel.app",
     accentColor: "#FF9F1C",
@@ -101,19 +105,18 @@ export const projects = [
 ];
 
 export const skills = {
-  Frontend: ["React", "Angular", "Next.js", "TypeScript", "Tailwind CSS", "Vue.js", "Redux", "RxJS", "Microfrontends"],
-  Backend: ["Node.js", "Spring Boot", ".NET Core", "Express.js", "GraphQL", "gRPC", "RESTful APIs"],
-  "AI / ML": ["OpenAI API", "LangChain", "NLP", "LLM Integration", "AI Automation", "Chatbot Development"],
-  "Cloud / DevOps": ["AWS", "Docker", "Kubernetes", "Terraform", "Jenkins", "GitHub Actions", "CI/CD"],
-  Databases: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "Elasticsearch"],
-  Security: ["OAuth 2.0", "JWT", "SAML", "RBAC", "Spring Security"],
-  Testing: ["Jest", "Cypress", "JUnit", "Mockito", "TDD", "BDD", "SonarQube"],
-  Monitoring: ["Grafana", "Prometheus", "ELK Stack", "CloudWatch"],
+  "Cloud & Azure": ["Microsoft Azure", "Azure Pipelines", "Azure Service Bus", "Azure Functions", "Logic Apps", "Docker"],
+  "Data & Analytics": ["Databricks", "T-SQL/SQL", "SQL Server", "PostgreSQL", "Data Modeling", "Schema Migrations"],
+  "ML & Integrations": ["Python", "Machine Learning", "NLP Classification", "Event-Driven Architecture", "RESTful APIs"],
+  Frontend: ["JavaScript", "TypeScript", "React", "Angular", "Next.js", "Tailwind CSS"],
+  "Backend": [".NET/C#", "Node.js", "Python", "Express.js"],
+  "Testing & Quality": ["Unit Testing", "xUnit", "Jest", "JUnit", "QA Documentation", "Deployment Docs"],
+  "DevOps & Support": ["Tier 2/3 Support", "Incident Escalation", "CI/CD", "Mentorship", "Software Configuration"],
 };
 
 export const skillsFlat = {
-  row1: ["React", "Angular", "Next.js", "TypeScript", "Tailwind CSS", "Vue.js", "Redux", "RxJS", "Microfrontends", "Node.js", "Express.js", "GraphQL", "gRPC"],
-  row2: ["AWS", "Docker", "Kubernetes", "Terraform", "Jenkins", "GitHub Actions", "OpenAI API", "LangChain", "PostgreSQL", "MongoDB", "Redis", "Spring Boot", ".NET Core"],
+  row1: ["Python", ".NET/C#", "T-SQL/SQL", "Azure Pipelines", "Azure Service Bus", "Databricks", "JavaScript", "TypeScript", "React", "Angular", "Node.js"],
+  row2: ["Machine Learning", "Unit Testing", "QA Documentation", "Tier 2/3 Support", "Mentorship", "Data Modeling", "Schema Migrations", "Docker", "CI/CD", "Event-Driven Integrations"],
 };
 
 export const education = [

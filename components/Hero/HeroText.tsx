@@ -138,13 +138,6 @@ export default function HeroText() {
         >
           View Work
         </button>
-        <a
-          href="/assets/resume.pdf"
-          download
-          className="btn-neon btn-neon-amber px-8 py-3 text-sm rounded-sm"
-        >
-          Download Resume
-        </a>
       </motion.div>
 
       <ScrollIndicator />
