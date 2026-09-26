@@ -1,6 +1,3 @@
-"use client";
-
-import dynamic from "next/dynamic";
 import SmoothScroll from "@/components/shared/SmoothScroll";
 import Navbar from "@/components/shared/Navbar";
 import About from "@/components/About";
@@ -10,19 +7,19 @@ import Projects from "@/components/Projects";
 import Education from "@/components/Education";
 import Contact from "@/components/Contact";
 
-// Lazy load hero to avoid SSR issues with Three.js
-const Hero = dynamic(() => import("@/components/Hero"), { ssr: false });
+import Hero from "@/components/Hero";
 
 export default function HomePage() {
   return (
     <SmoothScroll>
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <Navbar />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero />
         <About />
+        <Projects />
         <TechStack />
         <Experience />
-        <Projects />
         <Education />
         <Contact />
       </main>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Stars, Float } from "@react-three/drei";
 import * as THREE from "three";
@@ -143,7 +143,8 @@ function Aurora() {
 
 // ─── Mouse Tracker ─────────────────────────────────────────────────────────
 function MouseTracker({ mouse }: { mouse: React.MutableRefObject<[number, number]> }) {
-  useThree(({ gl }) => {
+  const gl = useThree((state) => state.gl);
+  useEffect(() => {
     const canvas = gl.domElement;
     const handler = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
@@ -154,7 +155,7 @@ function MouseTracker({ mouse }: { mouse: React.MutableRefObject<[number, number
     };
     canvas.addEventListener("mousemove", handler);
     return () => canvas.removeEventListener("mousemove", handler);
-  });
+  }, [gl, mouse]);
   return null;
 }
 
@@ -184,10 +185,12 @@ function Scene({ mouse }: { mouse: React.MutableRefObject<[number, number]> }) {
 }
 
 // ─── Exported Component ───────────────────────────────────────────────────
-export default function HeroScene({ mouse }: { mouse: React.MutableRefObject<[number, number]> }) {
+export default function HeroScene({ mouse, active }: { mouse: React.MutableRefObject<[number, number]>; active: boolean }) {
   return (
     <div className="absolute inset-0">
       <Canvas
+        frameloop={active ? "always" : "never"}
+        dpr={[1, 1.5]}
         camera={{ position: [0, 0, 8], fov: 55 }}
         gl={{ antialias: true, alpha: true }}
         style={{ background: "transparent" }}

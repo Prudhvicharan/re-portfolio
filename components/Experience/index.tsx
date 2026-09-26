@@ -12,15 +12,15 @@ export default function Experience() {
         <div style={{ position: "absolute", bottom: "25%", left: 0, width: 320, height: 320, background: "rgba(0,229,255,0.04)", filter: "blur(140px)", borderRadius: "50%", pointerEvents: "none" }} />
         <div style={{ position: "absolute", top: "10%", right: "10%", width: 200, height: 200, background: "rgba(255,159,28,0.03)", filter: "blur(100px)", borderRadius: "50%", pointerEvents: "none" }} />
 
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 clamp(20px, 4vw, 32px)" }}>
           {/* Heading */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={false}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 64, flexWrap: "wrap" }}
           >
-            <span style={{ fontFamily: "var(--font-accent)", color: "#00E5FF", fontSize: 12, letterSpacing: "0.3em", textTransform: "uppercase" }}>04.</span>
+            <span style={{ fontFamily: "var(--font-accent)", color: "#00E5FF", fontSize: 12, letterSpacing: "0.3em", textTransform: "uppercase" }}>05.</span>
             <div style={{ height: 1, width: 80, background: "linear-gradient(to right, #00E5FF, transparent)", opacity: 0.4 }} />
             <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(2.2rem, 5vw, 3.8rem)", color: "white", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>
               Where I&apos;ve Worked
@@ -32,7 +32,7 @@ export default function Experience() {
             {experience.map((role, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 40 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.6, ease: "easeOut", delay: i * 0.08 }}
@@ -65,18 +65,18 @@ export default function Experience() {
                       <h3 style={{ fontFamily: "var(--font-body)", fontWeight: 700, color: "white", fontSize: "clamp(1rem, 2vw, 1.25rem)", margin: 0 }}>{role.role}</h3>
                       {role.current && (
                         <span style={{
-                          fontFamily: "var(--font-body)", fontSize: 9, color: "#00E5FF",
+                          fontFamily: "var(--font-body)", fontSize: 12, color: "#00E5FF",
                           border: "1px solid rgba(0,229,255,0.4)", padding: "3px 10px",
                           borderRadius: 999, background: "rgba(0,229,255,0.08)",
                           textTransform: "uppercase", letterSpacing: "0.15em",
-                        }}>● Live</span>
+                        }}>Current</span>
                       )}
                     </div>
-                    <p style={{ fontFamily: "var(--font-body)", color: "#00E5FF", fontSize: 13, marginTop: 4, margin: "4px 0 0" }}>{role.company}</p>
+                    <p style={{ fontFamily: "var(--font-body)", color: "#00E5FF", fontSize: 13, marginTop: 4, margin: "4px 0 0" }}>{role.company}{role.employment ? ` · ${role.employment}` : ""}</p>
                   </div>
-                  <div style={{ textAlign: "right", flexShrink: 0 }}>
-                    <p style={{ fontFamily: "var(--font-body)", color: "#A8B2C8", fontSize: 12, opacity: 0.65, margin: 0 }}>{role.period}</p>
-                    <p style={{ fontFamily: "var(--font-body)", color: "#A8B2C8", fontSize: 11, opacity: 0.45, marginTop: 3 }}>{role.location}</p>
+                  <div style={{ textAlign: "left", minWidth: 0, overflowWrap: "anywhere" }}>
+                    <p style={{ fontFamily: "var(--font-body)", color: "#A8B2C8", fontSize: 12, opacity: 1, margin: 0 }}>{role.period}</p>
+                    <p style={{ fontFamily: "var(--font-body)", color: "#A8B2C8", fontSize: 12, opacity: 1, marginTop: 3 }}>{role.location}</p>
                   </div>
                 </div>
 
@@ -88,7 +88,7 @@ export default function Experience() {
                   {role.highlights.map((h, j) => (
                     <li key={j} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
                       <span style={{ color: "#00E5FF", marginTop: 1, flexShrink: 0, opacity: 0.7 }}>▸</span>
-                      <span style={{ fontFamily: "var(--font-body)", color: "#A8B2C8", fontSize: "clamp(0.78rem, 1.2vw, 0.875rem)", lineHeight: 1.75 }}>{h}</span>
+                      <span style={{ fontFamily: "var(--font-body)", color: "#A8B2C8", fontSize: "clamp(0.875rem, 1.2vw, 1rem)", lineHeight: 1.75 }}>{h}</span>
                     </li>
                   ))}
                 </ul>
