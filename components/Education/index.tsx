@@ -5,7 +5,7 @@ import { education } from "@/lib/data";
 import SectionWrapper from "../shared/SectionWrapper";
 import { GraduationCap, MapPin, Calendar, BookOpen } from "lucide-react";
 
-const yearColors = ["#00E5FF", "#A855F7"];
+const yearColors = ["#00E5FF", "#C084FC"];
 
 export default function Education() {
   return (
@@ -15,7 +15,7 @@ export default function Education() {
         paddingTop: 96, paddingBottom: 128, position: "relative", overflow: "hidden",
       }}>
         {/* Large ghost text */}
-        <div style={{
+        <div aria-hidden="true" style={{
           position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
           fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(100px, 18vw, 200px)",
           color: "white", opacity: 0.018, pointerEvents: "none", whiteSpace: "nowrap", letterSpacing: "-0.05em",
@@ -41,8 +41,8 @@ export default function Education() {
             style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 56, flexWrap: "wrap" }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: 12, flex: 1, flexWrap: "wrap" }}>
-              <span style={{ fontFamily: "var(--font-accent)", color: "#A855F7", fontSize: 12, letterSpacing: "0.3em", textTransform: "uppercase", flexShrink: 0 }}>06.</span>
-              <div style={{ height: 1, width: 60, background: "linear-gradient(to right, #A855F7, transparent)", opacity: 0.4, flexShrink: 0 }} />
+              <span style={{ fontFamily: "var(--font-accent)", color: "#C084FC", fontSize: 12, letterSpacing: "0.3em", textTransform: "uppercase", flexShrink: 0 }}>06.</span>
+              <div style={{ height: 1, width: 60, background: "linear-gradient(to right, #C084FC, transparent)", opacity: 0.4, flexShrink: 0 }} />
               <h2 style={{
                 fontFamily: "var(--font-heading)", fontWeight: 900,
                 fontSize: "clamp(1.6rem, 5vw, 3.8rem)",
@@ -67,7 +67,7 @@ export default function Education() {
               left: 39, /* center of the 80px column */
               top: 0, bottom: 0,
               width: 2,
-              background: "linear-gradient(to bottom, #A855F7, rgba(0,229,255,0.4))",
+              background: "linear-gradient(to bottom, #C084FC, rgba(0,229,255,0.4))",
               opacity: 0.25,
             }} />
 
@@ -107,7 +107,7 @@ export default function Education() {
                       <div style={{
                         fontFamily: "var(--font-heading)", fontWeight: 900,
                         fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)",
-                        color: accentColor, opacity: 0.22,
+                        color: accentColor, opacity: 1,
                         marginTop: 10, lineHeight: 1, textAlign: "center",
                       }}>
                         {year}

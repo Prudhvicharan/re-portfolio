@@ -53,17 +53,17 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
       <div style={{ padding: "28px" }}>
         {/* Title row */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 16, marginBottom: 8 }}>
           <div>
             <p style={{ fontFamily: "var(--font-body)", fontSize: 12, color: accent, textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 4, opacity: 1 }}>
               {project.tagline}
             </p>
             <h3 style={{ fontFamily: "var(--font-body)", fontWeight: 700, color: "white", fontSize: "1.25rem" }}>{project.name}</h3>
           </div>
-          <div style={{ display: "flex", gap: 8, flexShrink: 0, marginLeft: 16 }}>
+          <div style={{ display: "flex", gap: 8, flexShrink: 0 }}>
             {project.github && (
               <a aria-label={`View ${project.name} source code`} href={project.github} target="_blank" rel="noopener noreferrer"
-                style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 32, height: 32, borderRadius: 8, border: "1px solid rgba(255,255,255,0.1)", color: "#A8B2C8" }}
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 44, height: 44, borderRadius: 8, border: "1px solid rgba(255,255,255,0.1)", color: "#A8B2C8" }}
                 className="hover:text-white hover:border-white transition-colors"
               >
                 <Github size={15} />
@@ -71,7 +71,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             )}
             {project.live && (
               <a aria-label={`Open ${project.name} live demo`} href={project.live} target="_blank" rel="noopener noreferrer"
-                style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 32, height: 32, borderRadius: 8, border: `1px solid ${borderColor}`, color: accent }}
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 44, height: 44, borderRadius: 8, border: `1px solid ${borderColor}`, color: accent }}
                 className="hover:bg-[rgba(0,229,255,0.05)] transition-colors"
               >
                 <ExternalLink size={15} />
@@ -116,7 +116,7 @@ export default function Projects() {
           <div style={{ position: "absolute", bottom: 0, right: "25%", width: 320, height: 320, background: "rgba(255,159,28,0.04)", filter: "blur(120px)", borderRadius: "50%" }} />
         </div>
 
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 clamp(20px, 4vw, 32px)" }}>
           <motion.div
             initial={false}
             whileInView={{ opacity: 1, x: 0 }}

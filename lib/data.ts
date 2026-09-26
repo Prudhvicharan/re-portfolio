@@ -236,4 +236,3 @@ export const navItems = [
     "id": "contact"
   }
 ];
-

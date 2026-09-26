@@ -12,7 +12,7 @@ export default function Experience() {
         <div style={{ position: "absolute", bottom: "25%", left: 0, width: 320, height: 320, background: "rgba(0,229,255,0.04)", filter: "blur(140px)", borderRadius: "50%", pointerEvents: "none" }} />
         <div style={{ position: "absolute", top: "10%", right: "10%", width: 200, height: 200, background: "rgba(255,159,28,0.03)", filter: "blur(100px)", borderRadius: "50%", pointerEvents: "none" }} />
 
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 clamp(20px, 4vw, 32px)" }}>
           {/* Heading */}
           <motion.div
             initial={false}
@@ -74,7 +74,7 @@ export default function Experience() {
                     </div>
                     <p style={{ fontFamily: "var(--font-body)", color: "#00E5FF", fontSize: 13, marginTop: 4, margin: "4px 0 0" }}>{role.company}{role.employment ? ` · ${role.employment}` : ""}</p>
                   </div>
-                  <div style={{ textAlign: "right", flexShrink: 0 }}>
+                  <div style={{ textAlign: "left", minWidth: 0, overflowWrap: "anywhere" }}>
                     <p style={{ fontFamily: "var(--font-body)", color: "#A8B2C8", fontSize: 12, opacity: 1, margin: 0 }}>{role.period}</p>
                     <p style={{ fontFamily: "var(--font-body)", color: "#A8B2C8", fontSize: 12, opacity: 1, marginTop: 3 }}>{role.location}</p>
                   </div>

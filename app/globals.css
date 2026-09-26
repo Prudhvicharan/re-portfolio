@@ -311,3 +311,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+.contact-link > div:first-child { flex-shrink: 0; }
+.contact-link > div:last-child { min-width: 0; overflow-wrap: anywhere; }
+button:disabled { cursor: not-allowed; }

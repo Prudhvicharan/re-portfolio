@@ -11,11 +11,12 @@ type FormStatus = "idle" | "sending" | "success" | "error";
 
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
+  const [ready, setReady] = useState(false);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">("idle");
   const [year, setYear] = useState(new Date().getUTCFullYear());
   const sendingRef = useRef(false);
-  useEffect(() => { setYear(new Date().getFullYear()); }, []);
+  useEffect(() => { setYear(new Date().getFullYear()); setReady(true); }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -73,7 +74,7 @@ export default function Contact() {
         <div style={{ position: "absolute", bottom: 0, right: 0, width: 320, height: 320, background: "rgba(255,159,28,0.04)", filter: "blur(120px)", borderRadius: "50%" }} />
       </div>
 
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 clamp(20px, 4vw, 32px)" }}>
         {/* Section label */}
         <motion.div
           initial={false}
@@ -179,7 +180,7 @@ export default function Contact() {
                     borderRadius: 12, padding: "16px 20px",
                     textDecoration: "none", transition: "border-color 0.2s",
                   }}
-                  className="hover:border-[rgba(0,229,255,0.25)]"
+                  className="contact-link hover:border-[rgba(0,229,255,0.25)]"
                 >
                   <div style={{ width: 36, height: 36, borderRadius: 10, border: "1px solid rgba(0,229,255,0.2)", background: "rgba(0,229,255,0.05)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <Icon size={16} color="var(--accent)" />
@@ -210,7 +211,8 @@ export default function Contact() {
             <h3 style={{ fontFamily: "var(--font-body)", fontWeight: 700, color: "white", fontSize: "1.1rem", marginBottom: 24 }}>
               Send a Message
             </h3>
-            <form ref={formRef} onSubmit={handleSubmit} aria-describedby="contact-privacy" aria-busy={status === "sending"} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <noscript><p className="contact-note">Use the direct email link to get in touch when JavaScript is unavailable.</p></noscript>
+            <form method="post" ref={formRef} onSubmit={handleSubmit} aria-describedby="contact-privacy" aria-busy={status === "sending"} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <div className="contact-fields">
                 <div>
                   <label htmlFor="user_name" style={{ display: "block", fontFamily: "var(--font-body)", fontSize: 12, color: "var(--text-body)", opacity: 1, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>Your Name</label>
@@ -235,7 +237,7 @@ export default function Contact() {
 
               <motion.button
                 type="submit"
-                disabled={status === "sending"}
+                disabled={!ready || status === "sending"}
                 whileHover={{ scale: status === "sending" ? 1 : 1.02 }}
                 whileTap={{ scale: status === "sending" ? 1 : 0.97 }}
                 style={{
@@ -260,7 +262,7 @@ export default function Contact() {
       </div>
 
       {/* Footer */}
-      <div style={{ maxWidth: 1280, margin: "80px auto 0", padding: "0 32px" }}>
+      <div style={{ maxWidth: 1280, margin: "80px auto 0", padding: "0 clamp(20px, 4vw, 32px)" }}>
         <div style={{ height: 1, background: "linear-gradient(to right, transparent, rgba(0,229,255,0.2), transparent)", marginBottom: 32 }} />
         <p style={{ fontFamily: "var(--font-body)", color: "var(--text-body)", fontSize: 13, opacity: 1, textAlign: "center" }}>
           © {year} Prudhvi Charan P — Built with Next.js, Three.js &amp; a lot of caffeine ☕
