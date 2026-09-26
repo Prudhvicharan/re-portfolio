@@ -1,12 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { projects } from "@/lib/data";
 import SectionWrapper from "../shared/SectionWrapper";
 
 function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
+  const reducedMotion = useReducedMotion();
   const cardRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -17,7 +18,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
   const borderColor = isAmber ? "rgba(255,159,28,0.2)" : "rgba(0,229,255,0.15)";
 
   function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    if (!cardRef.current) return;
+    if (!cardRef.current || reducedMotion) return;
     const { left, top, width, height } = cardRef.current.getBoundingClientRect();
     x.set((e.clientX - left - width / 2) / (width / 2));
     y.set((e.clientY - top - height / 2) / (height / 2));
@@ -29,14 +30,14 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
       ref={cardRef}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      initial={{ opacity: 0, y: 40 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.1 }}
       style={{
         perspective: 1000,
-        rotateX: rotX,
-        rotateY: rotY,
+        rotateX: reducedMotion ? 0 : rotX,
+        rotateY: reducedMotion ? 0 : rotY,
         transformStyle: "preserve-3d",
         background: "rgba(13,21,37,0.7)",
         backdropFilter: "blur(20px)",
@@ -54,7 +55,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
         {/* Title row */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
           <div>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: 10, color: accent, textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 4, opacity: 0.8 }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: 12, color: accent, textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 4, opacity: 1 }}>
               {project.tagline}
             </p>
             <h3 style={{ fontFamily: "var(--font-body)", fontWeight: 700, color: "white", fontSize: "1.25rem" }}>{project.name}</h3>
@@ -62,7 +63,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           <div style={{ display: "flex", gap: 8, flexShrink: 0, marginLeft: 16 }}>
             {project.github && (
               <a aria-label={`View ${project.name} source code`} href={project.github} target="_blank" rel="noopener noreferrer"
-                style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 32, height: 32, borderRadius: 8, border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)" }}
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 32, height: 32, borderRadius: 8, border: "1px solid rgba(255,255,255,0.1)", color: "#A8B2C8" }}
                 className="hover:text-white hover:border-white transition-colors"
               >
                 <Github size={15} />
@@ -91,7 +92,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             <span
               key={t}
               style={{
-                fontFamily: "var(--font-body)", fontSize: 11, color: "var(--text-body)",
+                fontFamily: "var(--font-body)", fontSize: 12, color: "var(--text-body)",
                 border: "1px solid rgba(168,178,200,0.15)", padding: "4px 10px", borderRadius: 4,
                 background: "rgba(168,178,200,0.04)",
               }}
@@ -117,7 +118,7 @@ export default function Projects() {
 
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={false}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 56, flexWrap: "wrap" }}

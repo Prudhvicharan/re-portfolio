@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Linkedin, Github, Mail, Copy, Check, Send } from "lucide-react";
 import emailjs from "@emailjs/browser";
@@ -12,11 +12,15 @@ type FormStatus = "idle" | "sending" | "success" | "error";
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<FormStatus>("idle");
-  const [copied, setCopied] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">("idle");
+  const [year, setYear] = useState(new Date().getUTCFullYear());
+  const sendingRef = useRef(false);
+  useEffect(() => { setYear(new Date().getFullYear()); }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!formRef.current) return;
+    if (!formRef.current || sendingRef.current) return;
+    sendingRef.current = true;
     setStatus("sending");
     try {
       await emailjs.sendForm(
@@ -29,13 +33,18 @@ export default function Contact() {
       formRef.current.reset();
     } catch {
       setStatus("error");
+    } finally {
+      sendingRef.current = false;
     }
   }
 
   async function copyEmail() {
-    await navigator.clipboard.writeText(personal.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(personal.email);
+      setCopyStatus("copied");
+    } catch {
+      setCopyStatus("error");
+    }
   }
 
   const contactLinks = [
@@ -52,8 +61,7 @@ export default function Contact() {
     padding: "12px 16px",
     fontFamily: "var(--font-body)",
     color: "white",
-    fontSize: 14,
-    outline: "none",
+    fontSize: 16,
     boxSizing: "border-box" as const,
   };
 
@@ -68,19 +76,19 @@ export default function Contact() {
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
         {/* Section label */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
+          initial={false}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 40 }}
         >
           <span style={{ fontFamily: "var(--font-accent)", color: "var(--accent)", fontSize: 12, letterSpacing: "0.3em", textTransform: "uppercase" }}>07.</span>
           <span style={{ height: 1, width: 120, background: "linear-gradient(to right, var(--accent), transparent)", opacity: 0.3 }} />
-          <span style={{ fontFamily: "var(--font-body)", color: "var(--text-body)", fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", opacity: 0.5 }}>Contact</span>
+          <span style={{ fontFamily: "var(--font-body)", color: "var(--text-body)", fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", opacity: 1 }}>Contact</span>
         </motion.div>
 
         {/* Hero headline */}
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           style={{
@@ -97,7 +105,7 @@ export default function Contact() {
         </motion.h2>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
@@ -116,7 +124,7 @@ export default function Contact() {
           <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
             {/* Email copy */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={false}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               style={{
@@ -127,26 +135,28 @@ export default function Contact() {
                 padding: "20px 24px",
               }}
             >
-              <p style={{ fontFamily: "var(--font-body)", fontSize: 10, color: "var(--text-body)", opacity: 0.5, textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 10 }}>Direct Email</p>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "var(--text-body)", opacity: 1, textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 10 }}>Direct Email</p>
+              <div className="email-actions">
+                <div className="email-address">
                   <Mail size={15} color="var(--accent)" />
-                  <span style={{ fontFamily: "var(--font-body)", color: "white", fontSize: 14 }}>{personal.email}</span>
+                  <a href={`mailto:${personal.email}`}>{personal.email}</a>
                 </div>
                 <button
+                  type="button"
                   onClick={copyEmail}
                   style={{
                     display: "flex", alignItems: "center", gap: 6,
                     background: "rgba(0,229,255,0.08)", border: "1px solid rgba(0,229,255,0.2)",
                     borderRadius: 8, padding: "8px 14px", cursor: "pointer",
                     fontFamily: "var(--font-body)", fontSize: 12,
-                    color: copied ? "#34D399" : "var(--accent)", transition: "all 0.2s",
+                    color: copyStatus === "copied" ? "#34D399" : "var(--accent)", transition: "all 0.2s",
                   }}
                 >
-                  {copied ? <Check size={13} /> : <Copy size={13} />}
-                  {copied ? "Copied!" : "Copy"}
+                  {copyStatus === "copied" ? <Check size={13} /> : <Copy size={13} />}
+                  {copyStatus === "copied" ? "Copied!" : "Copy"}
                 </button>
               </div>
+              <p role="status" aria-live="polite" className="copy-status">{copyStatus === "copied" ? "Email address copied." : copyStatus === "error" ? "Could not copy. Use the email link above or select and copy the address." : ""}</p>
             </motion.div>
 
             {/* Other contacts */}
@@ -157,7 +167,7 @@ export default function Contact() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={false}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
@@ -175,49 +185,18 @@ export default function Contact() {
                     <Icon size={16} color="var(--accent)" />
                   </div>
                   <div>
-                    <p style={{ fontFamily: "var(--font-body)", fontSize: 10, color: "var(--text-body)", opacity: 0.5, textTransform: "uppercase", letterSpacing: "0.15em" }}>{label}</p>
+                    <p style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "var(--text-body)", opacity: 1, textTransform: "uppercase", letterSpacing: "0.15em" }}>{label}</p>
                     <p style={{ fontFamily: "var(--font-body)", color: "var(--text-body)", fontSize: 13, marginTop: 2 }}>{value}</p>
                   </div>
                 </motion.a>
               ))}
             </div>
 
-            {/* Animated envelope */}
-            <motion.div
-              whileHover="hover"
-              initial="rest"
-              style={{ alignSelf: "flex-start", marginTop: 8 }}
-            >
-              <svg width="80" height="60" viewBox="0 0 120 90" fill="none" style={{ overflow: "visible" }}>
-                <rect x="4" y="20" width="112" height="66" rx="8" stroke="rgba(0,229,255,0.5)" strokeWidth="2" fill="rgba(0,229,255,0.04)" />
-                <motion.path
-                  d="M4 20 L60 54 L116 20"
-                  stroke="rgba(0,229,255,0.5)" strokeWidth="2" fill="none"
-                  variants={{ hover: { d: "M4 20 L60 10 L116 20" }, rest: { d: "M4 20 L60 54 L116 20" } }}
-                  transition={{ duration: 0.3 }}
-                />
-                <motion.rect
-                  x="30" y="2" width="60" height="42" rx="4"
-                  fill="#0D1525" stroke="rgba(0,229,255,0.4)" strokeWidth="1.5"
-                  variants={{ hover: { y: -20, opacity: 1 }, rest: { y: 0, opacity: 0 } }}
-                  transition={{ duration: 0.3 }}
-                />
-                <motion.text
-                  x="60" y="26" textAnchor="middle" fontSize="7" fill="#00E5FF"
-                  fontFamily="JetBrains Mono, monospace" fontWeight="600"
-                  variants={{ hover: { opacity: 1, y: -18 }, rest: { opacity: 0, y: 0 } }}
-                  transition={{ duration: 0.3 }}
-                >
-                  Hi there! 👋
-                </motion.text>
-              </svg>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: 10, color: "var(--text-body)", opacity: 0.4, marginTop: 4 }}>Hover me</p>
-            </motion.div>
           </div>
 
           {/* Right: Message form */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={false}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             style={{
@@ -231,32 +210,28 @@ export default function Contact() {
             <h3 style={{ fontFamily: "var(--font-body)", fontWeight: 700, color: "white", fontSize: "1.1rem", marginBottom: 24 }}>
               Send a Message
             </h3>
-            <form ref={formRef} onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <form ref={formRef} onSubmit={handleSubmit} aria-describedby="contact-privacy" aria-busy={status === "sending"} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <div className="contact-fields">
                 <div>
-                  <label style={{ display: "block", fontFamily: "var(--font-body)", fontSize: 10, color: "var(--text-body)", opacity: 0.5, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>Your Name</label>
-                  <input name="user_name" type="text" required placeholder="John Doe" style={inputStyle} className="focus:border-[rgba(0,229,255,0.4)] focus:shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all" />
+                  <label htmlFor="user_name" style={{ display: "block", fontFamily: "var(--font-body)", fontSize: 12, color: "var(--text-body)", opacity: 1, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>Your Name</label>
+                  <input id="user_name" autoComplete="name" name="user_name" type="text" required placeholder="John Doe" style={inputStyle} className="focus:border-[rgba(0,229,255,0.4)] focus:shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all" />
                 </div>
                 <div>
-                  <label style={{ display: "block", fontFamily: "var(--font-body)", fontSize: 10, color: "var(--text-body)", opacity: 0.5, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>Your Email</label>
-                  <input name="user_email" type="email" required placeholder="john@example.com" style={inputStyle} className="focus:border-[rgba(0,229,255,0.4)] focus:shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all" />
+                  <label htmlFor="user_email" style={{ display: "block", fontFamily: "var(--font-body)", fontSize: 12, color: "var(--text-body)", opacity: 1, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>Your Email</label>
+                  <input id="user_email" autoComplete="email" name="user_email" type="email" required placeholder="john@example.com" style={inputStyle} className="focus:border-[rgba(0,229,255,0.4)] focus:shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all" />
                 </div>
               </div>
               <div>
-                <label style={{ display: "block", fontFamily: "var(--font-body)", fontSize: 10, color: "var(--text-body)", opacity: 0.5, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>Message</label>
-                <textarea name="message" required rows={5} placeholder="Tell me about your project or opportunity..." style={{ ...inputStyle, resize: "vertical" as const }} className="focus:border-[rgba(0,229,255,0.4)] focus:shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all" />
+                <label htmlFor="message" style={{ display: "block", fontFamily: "var(--font-body)", fontSize: 12, color: "var(--text-body)", opacity: 1, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>Message</label>
+                <textarea id="message" name="message" required rows={5} placeholder="Tell me about your project or opportunity..." style={{ ...inputStyle, resize: "vertical" as const }} className="focus:border-[rgba(0,229,255,0.4)] focus:shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all" />
               </div>
 
-              {status === "success" && (
-                <div style={{ background: "rgba(52,211,153,0.1)", border: "1px solid rgba(52,211,153,0.3)", borderRadius: 10, padding: "12px 16px", fontFamily: "var(--font-body)", color: "#34D399", fontSize: 13 }}>
-                  ✓ Message sent! I&apos;ll be in touch soon.
-                </div>
-              )}
-              {status === "error" && (
-                <div style={{ background: "rgba(244,63,94,0.1)", border: "1px solid rgba(244,63,94,0.3)", borderRadius: 10, padding: "12px 16px", fontFamily: "var(--font-body)", color: "#F43F5E", fontSize: 13 }}>
-                  ✗ Something went wrong. Please try emailing directly.
-                </div>
-              )}
+              <p id="contact-privacy" className="contact-note">Your name, email, and message are sent through EmailJS to my inbox so I can reply. Please don’t include sensitive information.</p>
+              <div role="status" aria-live="polite" aria-atomic="true" className={`form-feedback ${status}`}>
+                {status === "sending" && "Sending your message…"}
+                {status === "success" && "Message accepted by the email service. Thank you for getting in touch."}
+                {status === "error" && <>Your message could not be sent. Your text is still here. <a href={`mailto:${personal.email}`}>Email me directly</a> or try again.</>}
+              </div>
 
               <motion.button
                 type="submit"
@@ -287,8 +262,8 @@ export default function Contact() {
       {/* Footer */}
       <div style={{ maxWidth: 1280, margin: "80px auto 0", padding: "0 32px" }}>
         <div style={{ height: 1, background: "linear-gradient(to right, transparent, rgba(0,229,255,0.2), transparent)", marginBottom: 32 }} />
-        <p style={{ fontFamily: "var(--font-body)", color: "var(--text-body)", fontSize: 13, opacity: 0.4, textAlign: "center" }}>
-          © 2025 Prudhvi Charan P — Built with Next.js, Three.js &amp; a lot of caffeine ☕
+        <p style={{ fontFamily: "var(--font-body)", color: "var(--text-body)", fontSize: 13, opacity: 1, textAlign: "center" }}>
+          © {year} Prudhvi Charan P — Built with Next.js, Three.js &amp; a lot of caffeine ☕
         </p>
       </div>
       </div>

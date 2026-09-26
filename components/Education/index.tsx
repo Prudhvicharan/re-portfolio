@@ -35,7 +35,7 @@ export default function Education() {
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 clamp(20px, 5vw, 32px)", position: "relative" }}>
           {/* Heading */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={false}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 56, flexWrap: "wrap" }}
@@ -79,7 +79,7 @@ export default function Education() {
                 return (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, y: 40 }}
+                    initial={false}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.7, ease: "easeOut", delay: i * 0.12 }}
@@ -141,7 +141,7 @@ export default function Education() {
                       {/* Badge */}
                       <div style={{
                         display: "inline-flex", alignItems: "center", gap: 6,
-                        fontFamily: "var(--font-body)", fontSize: 9,
+                        fontFamily: "var(--font-body)", fontSize: 12,
                         color: accentColor,
                         background: `${accentColor}14`,
                         border: `1px solid ${accentColor}30`,
@@ -167,10 +167,10 @@ export default function Education() {
 
                       {/* Meta */}
                       <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginBottom: 20 }}>
-                        <span style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: "var(--font-body)", color: "#A8B2C8", fontSize: 11, opacity: 0.6 }}>
+                        <span style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: "var(--font-body)", color: "#A8B2C8", fontSize: 12, opacity: 1 }}>
                           <MapPin size={11} /> {edu.location}
                         </span>
-                        <span style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: "var(--font-body)", color: "#A8B2C8", fontSize: 11, opacity: 0.6 }}>
+                        <span style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: "var(--font-body)", color: "#A8B2C8", fontSize: 12, opacity: 1 }}>
                           <Calendar size={11} /> {edu.period}
                         </span>
                       </div>
@@ -182,7 +182,7 @@ export default function Education() {
                         border: `1px solid ${accentColor}28`,
                         borderRadius: 12, padding: "10px 18px", marginBottom: 20,
                       }}>
-                        <span style={{ fontFamily: "var(--font-body)", fontSize: 9, color: accentColor, opacity: 0.55, textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 4 }}>GPA</span>
+                        <span style={{ fontFamily: "var(--font-body)", fontSize: 12, color: accentColor, opacity: 1, textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 4 }}>GPA</span>
                         <span style={{ fontFamily: "var(--font-accent)", fontWeight: 700, fontSize: "clamp(1.1rem, 2vw, 1.5rem)", color: accentColor, lineHeight: 1 }}>
                           {edu.gpa}
                         </span>
@@ -192,12 +192,12 @@ export default function Education() {
                       {edu.courses.length > 0 && <div>
                         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
                           <BookOpen size={11} color="#A8B2C8" opacity={0.45} />
-                          <span style={{ fontFamily: "var(--font-body)", fontSize: 9, color: "#A8B2C8", opacity: 0.45, textTransform: "uppercase", letterSpacing: "0.2em" }}>Key Coursework</span>
+                          <span style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "#A8B2C8", opacity: 1, textTransform: "uppercase", letterSpacing: "0.2em" }}>Key Coursework</span>
                         </div>
                         <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                           {edu.courses.map((c) => (
                             <span key={c} style={{
-                              fontFamily: "var(--font-body)", fontSize: 11, color: "#A8B2C8",
+                              fontFamily: "var(--font-body)", fontSize: 12, color: "#A8B2C8",
                               border: "1px solid rgba(168,178,200,0.1)", padding: "5px 12px", borderRadius: 6,
                               background: "rgba(168,178,200,0.04)",
                             }}>
