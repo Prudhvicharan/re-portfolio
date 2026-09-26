@@ -20,9 +20,9 @@ export default function HomePage() {
       <main>
         <Hero />
         <About />
+        <Projects />
         <TechStack />
         <Experience />
-        <Projects />
         <Education />
         <Contact />
       </main>

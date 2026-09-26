@@ -61,7 +61,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           </div>
           <div style={{ display: "flex", gap: 8, flexShrink: 0, marginLeft: 16 }}>
             {project.github && (
-              <a href={project.github} target="_blank" rel="noopener noreferrer"
+              <a aria-label={`View ${project.name} source code`} href={project.github} target="_blank" rel="noopener noreferrer"
                 style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 32, height: 32, borderRadius: 8, border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)" }}
                 className="hover:text-white hover:border-white transition-colors"
               >
@@ -69,7 +69,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
               </a>
             )}
             {project.live && (
-              <a href={project.live} target="_blank" rel="noopener noreferrer"
+              <a aria-label={`Open ${project.name} live demo`} href={project.live} target="_blank" rel="noopener noreferrer"
                 style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 32, height: 32, borderRadius: 8, border: `1px solid ${borderColor}`, color: accent }}
                 className="hover:bg-[rgba(0,229,255,0.05)] transition-colors"
               >
@@ -79,21 +79,11 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           </div>
         </div>
 
-        {/* Metric */}
-        <div style={{
-          fontFamily: "var(--font-heading)", fontWeight: 900,
-          fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
-          color: accent, marginBottom: 4, lineHeight: 1,
-        }}>
-          {project.metrics.headline}
-        </div>
-        <p style={{ fontFamily: "var(--font-body)", color: "var(--text-body)", fontSize: 12, opacity: 0.6, marginBottom: 14 }}>
-          {project.metrics.sub}
-        </p>
-
-        <p style={{ fontFamily: "var(--font-body)", color: "var(--text-body)", fontSize: "0.875rem", lineHeight: 1.7, marginBottom: 20 }}>
-          {project.description}
-        </p>
+        <dl className="project-evidence">
+          <div><dt>Problem</dt><dd>{project.problem}</dd></div>
+          <div><dt>My contribution</dt><dd>{project.role}</dd></div>
+          <div><dt>Results</dt><dd>{project.outcome}</dd></div>
+        </dl>
 
         {/* Tech stack */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
@@ -132,7 +122,7 @@ export default function Projects() {
             viewport={{ once: true }}
             style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 56, flexWrap: "wrap" }}
           >
-            <span style={{ fontFamily: "var(--font-accent)", color: "#00E5FF", fontSize: 12, letterSpacing: "0.3em", textTransform: "uppercase" }}>05.</span>
+            <span style={{ fontFamily: "var(--font-accent)", color: "#00E5FF", fontSize: 12, letterSpacing: "0.3em", textTransform: "uppercase" }}>03.</span>
             <div style={{ height: 1, width: 80, background: "linear-gradient(to right, #00E5FF, transparent)", opacity: 0.4 }} />
             <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(2.2rem, 5vw, 3.8rem)", color: "white", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>
               What I&apos;ve Built

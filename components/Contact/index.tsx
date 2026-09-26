@@ -40,8 +40,8 @@ export default function Contact() {
 
   const contactLinks = [
     { icon: Phone, label: "Phone", value: personal.phone, href: `tel:${personal.phone}` },
-    { icon: Linkedin, label: "LinkedIn", value: `@${personal.linkedin}`, href: `https://linkedin.com/in/${personal.linkedin}` },
-    { icon: Github, label: "GitHub", value: `@${personal.github}`, href: `https://github.com/${personal.github}` },
+    { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/prudhvi-charan", href: personal.linkedin },
+    { icon: Github, label: "GitHub", value: "github.com/Prudhvicharan", href: personal.github },
   ];
 
   const inputStyle = {

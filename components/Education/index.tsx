@@ -188,8 +188,8 @@ export default function Education() {
                         </span>
                       </div>
 
-                      {/* Coursework */}
-                      <div>
+                      {/* Coursework is shown only when supplied in the résumé. */}
+                      {edu.courses.length > 0 && <div>
                         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
                           <BookOpen size={11} color="#A8B2C8" opacity={0.45} />
                           <span style={{ fontFamily: "var(--font-body)", fontSize: 9, color: "#A8B2C8", opacity: 0.45, textTransform: "uppercase", letterSpacing: "0.2em" }}>Key Coursework</span>
@@ -205,7 +205,7 @@ export default function Education() {
                             </span>
                           ))}
                         </div>
-                      </div>
+                      </div>}
                     </motion.div>
                   </motion.div>
                 );

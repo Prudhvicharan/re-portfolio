@@ -270,3 +270,18 @@ body::before {
     max-width: 100vw;
   }
 }
+
+/* Shared content styles preserve the existing palette and card direction. */
+.section-content { max-width: 1280px; margin: 0 auto; padding: 96px clamp(20px, 4vw, 32px) 112px; }
+.surface-section { background: var(--surface); }
+.section-heading { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+.section-heading > span { color: var(--accent); font: 14px var(--font-accent); }
+.section-heading h2 { font: 800 clamp(2rem, 5vw, 3.8rem)/1.1 var(--font-heading); text-transform: uppercase; }
+.intro-copy { max-width: 850px; color: var(--text-body); font-size: 16px; line-height: 1.8; margin-bottom: 24px; }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 36px; }
+.skill-heading { font: 700 16px var(--font-heading); color: var(--accent); margin-bottom: 16px; }
+.skill-pills { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+.skill-pills li { border: 1px solid rgba(0,229,255,.3); border-radius: 6px; padding: 8px 12px; color: var(--text-body); background: rgba(0,229,255,.04); font-size: 14px; }
+.project-evidence { color: var(--text-body); font-size: 14px; line-height: 1.75; margin: 24px 0; }
+.project-evidence > div + div { margin-top: 16px; }
+.project-evidence dt { color: white; font-weight: 600; margin-bottom: 4px; }

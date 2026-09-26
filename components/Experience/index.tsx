@@ -20,7 +20,7 @@ export default function Experience() {
             viewport={{ once: true }}
             style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 64, flexWrap: "wrap" }}
           >
-            <span style={{ fontFamily: "var(--font-accent)", color: "#00E5FF", fontSize: 12, letterSpacing: "0.3em", textTransform: "uppercase" }}>04.</span>
+            <span style={{ fontFamily: "var(--font-accent)", color: "#00E5FF", fontSize: 12, letterSpacing: "0.3em", textTransform: "uppercase" }}>05.</span>
             <div style={{ height: 1, width: 80, background: "linear-gradient(to right, #00E5FF, transparent)", opacity: 0.4 }} />
             <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(2.2rem, 5vw, 3.8rem)", color: "white", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>
               Where I&apos;ve Worked
@@ -69,10 +69,10 @@ export default function Experience() {
                           border: "1px solid rgba(0,229,255,0.4)", padding: "3px 10px",
                           borderRadius: 999, background: "rgba(0,229,255,0.08)",
                           textTransform: "uppercase", letterSpacing: "0.15em",
-                        }}>● Live</span>
+                        }}>Current</span>
                       )}
                     </div>
-                    <p style={{ fontFamily: "var(--font-body)", color: "#00E5FF", fontSize: 13, marginTop: 4, margin: "4px 0 0" }}>{role.company}</p>
+                    <p style={{ fontFamily: "var(--font-body)", color: "#00E5FF", fontSize: 13, marginTop: 4, margin: "4px 0 0" }}>{role.company}{role.employment ? ` · ${role.employment}` : ""}</p>
                   </div>
                   <div style={{ textAlign: "right", flexShrink: 0 }}>
                     <p style={{ fontFamily: "var(--font-body)", color: "#A8B2C8", fontSize: 12, opacity: 0.65, margin: 0 }}>{role.period}</p>
