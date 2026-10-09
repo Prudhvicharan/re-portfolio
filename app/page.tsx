@@ -1,28 +1,19 @@
-import SmoothScroll from "@/components/shared/SmoothScroll";
-import Navbar from "@/components/shared/Navbar";
-import About from "@/components/About";
-import TechStack from "@/components/TechStack";
-import Experience from "@/components/Experience";
-import Projects from "@/components/Projects";
-import Education from "@/components/Education";
-import Contact from "@/components/Contact";
-
-import Hero from "@/components/Hero";
+import Nav from "@/components/site/Nav";
+import Motion from "@/components/site/Motion";
+import { ContactSheet, Cover, Experience, Materials, Profile, Work } from "@/components/site/Sections";
 
 export default function HomePage() {
-  return (
-    <SmoothScroll>
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <Navbar />
-      <main id="main-content" tabIndex={-1}>
-        <Hero />
-        <About />
-        <Projects />
-        <TechStack />
-        <Experience />
-        <Education />
-        <Contact />
-      </main>
-    </SmoothScroll>
-  );
+  return <>
+    <a className="skip" href="#profile">Skip to content</a>
+    <Nav />
+    <main id="main">
+      <Cover />
+      <Profile />
+      <Work />
+      <Experience />
+      <Materials />
+      <ContactSheet />
+    </main>
+    <Motion />
+  </>;
 }
