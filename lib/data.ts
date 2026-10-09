@@ -117,6 +117,40 @@ export const projects = [
     ],
     "github": "https://github.com/Prudhvicharan/launchmasters",
     "live": "https://launchmasters-prod.vercel.app"
+  },
+  {
+    "name": "GitFolio",
+    "tagline": "GitHub Profile README Builder",
+    "problem": "A GitHub profile README is the first thing many reviewers see, and turning scattered public repositories into a clear story takes hours of hand-written Markdown.",
+    "role": "Built a client-only builder that imports a public GitHub profile, lets the user pick up to eight repositories, drafts the story by hand or with optional Gemini, and composes it in three directions (Editorial, Studio, Aurora) before exporting sanitized Markdown.",
+    "outcome": "Live at gitfolio.prudhvicharan.com. No account or server needed; API keys are never stored, and tests cover README generation, security, storage and navigation.",
+    "stack": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "GitHub REST API",
+      "Gemini API",
+      "react-markdown",
+      "rehype-sanitize",
+      "Vercel"
+    ],
+    "github": "https://github.com/Prudhvicharan/gitfolio",
+    "live": "https://gitfolio.prudhvicharan.com/"
+  },
+  {
+    "name": "Four Founders",
+    "tagline": "VS Code Theme Collection",
+    "problem": "Most editor themes are built for a screenshot, not for reading code for eight hours straight.",
+    "role": "Designed and published eight VS Code color themes, four houses in dark and light, with house colors kept to the window chrome and syntax colors tuned for long, readable sessions.",
+    "outcome": "Published on the Visual Studio Code Marketplace as prudhvicharan.four-founders, with paired dark and light themes that can follow the system appearance.",
+    "stack": [
+      "VS Code Theme API",
+      "JSON color tokens",
+      "Semantic highlighting",
+      "JavaScript"
+    ],
+    "github": "https://github.com/Prudhvicharan/four-founders",
+    "live": "https://marketplace.visualstudio.com/items?itemName=prudhvicharan.four-founders"
   }
 ];
 

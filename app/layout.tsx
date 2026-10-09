@@ -34,10 +34,8 @@ const person = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <body>
-        {/* Marks JS as available before first paint, so the cover can animate in without a flash. */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js');setTimeout(function(){document.documentElement.classList.add('loaded')},2500)" }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} />
         {children}
       </body>

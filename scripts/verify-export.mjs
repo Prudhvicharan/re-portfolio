@@ -29,6 +29,7 @@ assert(document.querySelector('a[href="https://www.linkedin.com/in/prudhvi-chara
 assert.match(sheet('experience').textContent, /July 2026 – Present/);
 assert.match(sheet('experience').textContent, /March 2025 – June 2026/);
 assert.match(sheet('work').textContent, /Career Axis/);
-assert.match(sheet('work').textContent, /LaunchMasters/);
+for (const name of ['LaunchMasters', 'GitFolio', 'Four Founders']) assert.match(sheet('work').textContent, new RegExp(name));
+assert.equal(document.querySelectorAll('.entry').length, 4, 'All four projects are in the register');
 assert.match(sheet('materials').textContent, /Databricks/);
 console.log('Export checks passed: sheets in order, no links to old pages, résumé reachable, labelled fields, named links, structured data, SEO files.');

@@ -1,10 +1,10 @@
-import { ArrowDown, ArrowUpRight, Github } from "lucide-react";
-import { education, experience, personal, projects, skills } from "@/lib/data";
-import { work } from "@/lib/work";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { education, experience, personal, skills } from "@/lib/data";
 import Sheet from "./Sheet";
 import Portrait from "./Portrait";
 import Clock from "./Clock";
 import Contact from "./Contact";
+import Register from "./Register";
 import { RESUME } from "./Nav";
 
 const hntb = experience[0];
@@ -60,42 +60,9 @@ export function Profile() {
 }
 
 export function Work() {
-  return <Sheet id="work" no="A-03" title="Selected work" tone="blue">
-    <div className="sheet-head"><h2 id="work-title">Work</h2><p>Two products I designed and built end to end. Red marks point at the parts I’m responsible for.</p></div>
-    {projects.map((p, i) => {
-      const w = work[p.name];
-      return <article className="plate" key={p.name} aria-labelledby={`plate-${i}`}>
-        <div className="plate-head">
-          <span className="plate-no" aria-hidden="true">W{i + 1}</span>
-          <div><h3 id={`plate-${i}`}>{p.name}</h3><p className="mono">{p.tagline}</p></div>
-          <div className="plate-links">
-            <a className="btn btn--red" href={p.live} target="_blank" rel="noopener noreferrer">Open live <ArrowUpRight size={16} aria-hidden="true" /></a>
-            <a className="btn btn--ghost" href={p.github} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} source on GitHub`}><Github size={16} aria-hidden="true" />Source</a>
-          </div>
-        </div>
-        <figure className="figure">
-          <div className="figure-bar mono" aria-hidden="true"><span><i /><i /><i /></span><span>{w.url}</span><span>Fig. W{i + 1}</span></div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={w.image} alt={w.alt} width={2880} height={1800} loading="lazy" decoding="async" />
-          <div className="callouts" aria-hidden="true">
-            <svg viewBox="0 0 160 100" preserveAspectRatio="none">
-              {w.callouts.map(c => <g key={c.label}>
-                <path pathLength={1} strokeDasharray="1 1" d={`M${c.target[0] * 1.6} ${c.target[1]} L${c.at[0] * 1.6} ${c.at[1]}`} />
-                <circle cx={c.target[0] * 1.6} cy={c.target[1]} r="1.6" />
-              </g>)}
-            </svg>
-            {w.callouts.map(c => <p key={c.label} className="callout" style={{ left: `${c.at[0]}%`, top: `${c.at[1]}%`, "--tx": c.side === "left" ? "-100%" : "0" } as React.CSSProperties}><b>{c.label}</b>{c.text}</p>)}
-          </div>
-          <figcaption className="sr-only">{w.callouts.map(c => `${c.label}: ${c.text}.`).join(" ")}</figcaption>
-        </figure>
-        <div className="plate-spec">
-          <div><h4 className="mono red">Problem</h4><p>{p.problem}</p></div>
-          <div><h4 className="mono red">What I built</h4><p>{p.role}</p></div>
-          <div><h4 className="mono red">Outcome</h4><p>{p.outcome}</p></div>
-          <div><h4 className="mono red">Stack</h4><ul className="tags">{p.stack.map(s => <li key={s}>{s}</li>)}</ul></div>
-        </div>
-      </article>;
-    })}
+  return <Sheet id="work" no="A-03" title="Drawing register" tone="blue">
+    <div className="sheet-head"><h2 id="work-title">Work</h2><p>Four things I designed and shipped. Open one to see how the system fits together.</p></div>
+    <Register />
   </Sheet>;
 }
 

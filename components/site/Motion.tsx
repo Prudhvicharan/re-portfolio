@@ -33,6 +33,25 @@ export default function Motion() {
       return () => cleanups.forEach(c => c());
     }
 
+    // In-page links: scroll to the anchor's position in normal flow (sheets above it may be stuck),
+    // through Lenis when it is running so the motion matches the wheel.
+    let smoothTo: ((y: number) => void) | null = null;
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const link = (e.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
+      const target = link && document.getElementById(link.hash.slice(1));
+      if (!link || !target) return;
+      e.preventDefault();
+      const y = target.offsetTop;
+      if (smoothTo) smoothTo(y); else window.scrollTo({ top: y, behavior: reduced ? "auto" : "smooth" });
+      history.pushState(null, "", link.hash);
+      const sheet = target.nextElementSibling as HTMLElement | null;
+      sheet?.setAttribute("tabindex", "-1");
+      sheet?.focus({ preventScroll: true });
+    };
+    document.addEventListener("click", onClick);
+    cleanups.push(() => document.removeEventListener("click", onClick));
+
     let disposed = false;
     (async () => {
       const [{ default: gsap }, { ScrollTrigger }, { default: Lenis }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger"), import("lenis")]);
@@ -40,12 +59,13 @@ export default function Motion() {
       gsap.registerPlugin(ScrollTrigger);
 
       if (fine) {
-        const lenis = new Lenis({ lerp: .1, smoothWheel: true, anchors: true, autoRaf: false });
+        const lenis = new Lenis({ lerp: .1, smoothWheel: true, autoRaf: false });
+        smoothTo = y => lenis.scrollTo(y, { duration: 1.2 });
         const raf = (t: number) => lenis.raf(t * 1000);
         lenis.on("scroll", ScrollTrigger.update);
         gsap.ticker.add(raf);
         gsap.ticker.lagSmoothing(0);
-        cleanups.push(() => { gsap.ticker.remove(raf); lenis.destroy(); });
+        cleanups.push(() => { smoothTo = null; gsap.ticker.remove(raf); lenis.destroy(); });
       }
 
       const ctx = gsap.context(() => {
@@ -63,15 +83,6 @@ export default function Motion() {
             },
           });
         }
-        // Markup callouts: leader lines draw, then the labels drop in.
-        gsap.utils.toArray<HTMLElement>(".figure").forEach(fig => {
-          const paths = fig.querySelectorAll("path"), marks = fig.querySelectorAll("circle"), notes = fig.querySelectorAll(".callout");
-          const tl = gsap.timeline({ scrollTrigger: { trigger: fig, start: "top 70%", toggleActions: "play none none reverse" } });
-          tl.fromTo(marks, { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: .35, stagger: .12, ease: "back.out(3)" })
-            .fromTo(paths, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: .6, stagger: .12, ease: "power2.inOut" }, "<.1")
-            .fromTo(notes, { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .12, ease: "power3.out" }, "-=.35");
-          gsap.fromTo(fig.querySelector("img"), { scale: 1.06 }, { scale: 1, ease: "none", scrollTrigger: { trigger: fig, start: "top bottom", end: "bottom top", scrub: true } });
-        });
         // Experience: dimension lines extend from their start dates.
         gsap.fromTo(".span-bar", { scaleX: 0 }, { scaleX: 1, duration: 1, stagger: .09, ease: "power3.out", scrollTrigger: { trigger: ".chart", start: "top 75%" } });
         // Big headings rise in as each sheet arrives.
@@ -80,6 +91,10 @@ export default function Motion() {
         });
       });
       cleanups.push(() => ctx.revert());
+      // Unfolding a project changes page height: re-measure sticky offsets and triggers.
+      const relayout = () => { stick(); ScrollTrigger.refresh(); };
+      addEventListener("layoutchange", relayout);
+      cleanups.push(() => removeEventListener("layoutchange", relayout));
       ScrollTrigger.refresh();
     })();
 

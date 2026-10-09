@@ -1,26 +1,53 @@
-// Presentation only: which screenshot each project uses and where its markup callouts point.
-// Coordinates are percentages of the screenshot (target = what the leader line points at).
-export interface Callout { label: string; text: string; target: [number, number]; at: [number, number]; side: "left" | "right" }
+// Presentation only: how each project reads in the drawing register.
+// `flow` is the system schematic, left to right; every step reflects lib/data.ts or the repo README.
+export interface Step { label: string; note?: string; accent?: boolean }
 
-export const work: Record<string, { image: string; alt: string; url: string; callouts: Callout[] }> = {
+export const work: Record<string, { kind: string; host: string; flow: Step[] }> = {
   "Career Axis": {
-    image: "/work/career-axis.jpg",
-    alt: "Career Axis sign-in screen: Google sign-in with read-only Gmail access to track job applications.",
-    url: "prudhvicharan.github.io/Career-Axis",
-    callouts: [
-      { label: "Ingest", text: "Gmail integration: applications tracked straight from the inbox", target: [50, 67], at: [70, 84], side: "right" },
-      { label: "Classify", text: "Rules, then subject-level AI, then a full-body model fallback", target: [38.5, 55.5], at: [27, 44], side: "left" },
-      { label: "Outcome", text: "500+ active users · 90%+ accuracy across eight job-signal categories", target: [50, 36], at: [70, 22], side: "right" },
+    kind: "Full-stack app",
+    host: "prudhvicharan.github.io",
+    flow: [
+      { label: "Gmail API", note: "read-only inbox" },
+      { label: "Rules", note: "cheap, exact matches" },
+      { label: "Subject-level AI", note: "most messages stop here" },
+      { label: "Full-body model", note: "fallback for the hard ones", accent: true },
+      { label: "Azure Service Bus", note: "async routing" },
+      { label: "Tracker", note: "8 job-signal categories" },
     ],
   },
   LaunchMasters: {
-    image: "/work/launchmasters.jpg",
-    alt: "LaunchMasters home page: a college application platform with search, deadlines and reminders.",
-    url: "launchmasters-prod.vercel.app",
-    callouts: [
-      { label: "Data", text: "Institution data from external REST APIs, normalized by Python import scripts", target: [51.4, 4.3], at: [74, 17], side: "right" },
-      { label: "Backend", text: "Node.js and Express API with Redis caching, filtering and pagination", target: [43.5, 64.5], at: [33, 80], side: "left" },
-      { label: "Scale", text: "1,200+ students · 500+ concurrent users at 99.5% uptime", target: [52, 84], at: [76, 62], side: "right" },
+    kind: "Full-stack platform",
+    host: "launchmasters-prod.vercel.app",
+    flow: [
+      { label: "External REST APIs", note: "institution data" },
+      { label: "Python import", note: "normalize + load" },
+      { label: "SQL schema", note: "schema-driven model" },
+      { label: "Node / Express API", note: "filtering, pagination" },
+      { label: "Redis cache", note: "hot queries", accent: true },
+      { label: "Angular app", note: "search, deadlines" },
+    ],
+  },
+  GitFolio: {
+    kind: "Developer tool",
+    host: "gitfolio.prudhvicharan.com",
+    flow: [
+      { label: "GitHub public API", note: "no login" },
+      { label: "Pick repositories", note: "up to eight" },
+      { label: "Write or draft", note: "Gemini is optional", accent: true },
+      { label: "Compose", note: "Editorial · Studio · Aurora" },
+      { label: "Sanitized preview", note: "rehype-sanitize" },
+      { label: "README.md", note: "copy or download" },
+    ],
+  },
+  "Four Founders": {
+    kind: "VS Code extension",
+    host: "VS Code Marketplace",
+    flow: [
+      { label: "Four houses", note: "Godric · Salazar · Rowena · Helga" },
+      { label: "Dark + light", note: "eight themes" },
+      { label: "Workbench colors", note: "house banners on the chrome", accent: true },
+      { label: "Syntax tokens", note: "tuned for long sessions" },
+      { label: "Marketplace", note: "prudhvicharan.four-founders" },
     ],
   },
 };
