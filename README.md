@@ -30,7 +30,7 @@ npm run build
 npm run test:export
 ```
 
-Interaction tests mock EmailJS and use jsdom; they do not send email or certify browser layout. See [AUDIT-CLEANUP.md](AUDIT-CLEANUP.md) for completed checks, content provenance, and remaining manual browser/delivery checks.
+Interaction tests mock EmailJS and use jsdom; they do not send email or certify browser layout.
 
 ## Export and deployment
 
