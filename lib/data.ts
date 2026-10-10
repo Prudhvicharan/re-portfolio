@@ -1,15 +1,6 @@
 export const personal = {
   "name": "Prudhvi Charan P",
-  "firstName": "PRUDHVI",
-  "lastName": "CHARAN",
-  "title": "Full-Stack Application Developer",
-  "roles": [
-    "Application Developer II at HNTB",
-    "Data Engineering · Databricks · SQL Server"
-  ],
-  "bio": "I build and support applications across .NET/C#, SQL, Python, and TypeScript. At HNTB, my work focuses on data engineering with Databricks and Medallion Architecture, with Azure Synapse in scope.",
   "email": "bunnycharanprudhvi@gmail.com",
-  "phone": "816-762-8317",
   "linkedin": "https://www.linkedin.com/in/prudhvi-charan",
   "github": "https://github.com/Prudhvicharan",
   "portfolio": "https://prudhvicharan.com"
@@ -223,7 +214,6 @@ export const education = [
     location: "Kansas City, MO",
     period: "January 2023 – May 2024",
     gpa: "3.8 / 4.0",
-    highlight: true,
     courses: [
       "Advanced Algorithms",
       "Distributed Systems",
@@ -239,34 +229,7 @@ export const education = [
     location: "Tamil Nadu, India",
     period: "June 2016 – June 2021",
     gpa: "8.67 / 10",
-    highlight: false,
     courses: [],
   },
 ];
 
-export const navItems = [
-  {
-    "label": "About",
-    "id": "about"
-  },
-  {
-    "label": "Projects",
-    "id": "projects"
-  },
-  {
-    "label": "Skills",
-    "id": "skills"
-  },
-  {
-    "label": "Experience",
-    "id": "experience"
-  },
-  {
-    "label": "Education",
-    "id": "education"
-  },
-  {
-    "label": "Contact",
-    "id": "contact"
-  }
-];

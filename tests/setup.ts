@@ -6,7 +6,3 @@ Object.defineProperty(window, "matchMedia", { writable: true, value: vi.fn().moc
 class Observer { observe() {} unobserve() {} disconnect() {} }
 vi.stubGlobal("IntersectionObserver", Observer);
 vi.stubGlobal("ResizeObserver", Observer);
-// jsdom does not implement native dialog behavior. These tests exercise our
-// state, focus handlers and cancellation; real browser verification is separate.
-HTMLDialogElement.prototype.showModal = function () { this.setAttribute("open", ""); };
-HTMLDialogElement.prototype.close = function () { this.removeAttribute("open"); };

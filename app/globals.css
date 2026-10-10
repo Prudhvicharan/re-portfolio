@@ -1,9 +1,23 @@
-@import "tailwindcss";
+/* Base reset, in a layer so every rule below always wins over it. */
+@layer reset {
+  *, ::before, ::after, ::backdrop { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid; }
+  html { line-height: 1.5; -webkit-text-size-adjust: 100%; tab-size: 4; }
+  h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+  a { color: inherit; text-decoration: inherit; }
+  b, strong { font-weight: bolder; }
+  small { font-size: 80%; }
+  ol, ul, menu { list-style: none; }
+  img, svg, video, canvas { display: block; vertical-align: middle; }
+  img, video { max-width: 100%; height: auto; }
+  button, input, select, textarea { font: inherit; letter-spacing: inherit; color: inherit; border-radius: 0; background-color: transparent; opacity: 1; }
+  ::placeholder { opacity: 1; color: color-mix(in oklab, currentcolor 50%, transparent); }
+  textarea { resize: vertical; }
+  [hidden]:where(:not([hidden="until-found"])) { display: none !important; }
+}
 
 /* Drawing set: cyanotype blue, cool drafting paper, and one red markup pen. */
 :root {
   --blue: #123a86;
-  --blue-deep: #0d2c69;
   --paper: #edf0f2;
   --ink: #0f2550;
   --red: #ff4a2e;
@@ -16,15 +30,10 @@
   --gutter: clamp(18px, 3.4vw, 52px);
 }
 
-* { box-sizing: border-box; }
 html { background: var(--blue); -webkit-text-size-adjust: 100%; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 body { margin: 0; color: var(--paper); background: var(--blue); font: 400 16px/1.6 var(--body); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-h1, h2, h3, p, ol, ul, dl, dd, figure { margin: 0; }
-ol, ul { padding: 0; list-style: none; }
-a { color: inherit; }
-button, input, textarea { font: inherit; color: inherit; }
 ::selection { background: var(--red); color: #fff; }
 :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -33,7 +42,6 @@ button, input, textarea { font: inherit; color: inherit; }
 
 /* ── Shared drafting vocabulary ─────────────────────────────── */
 .mono { font-family: var(--mono); font-size: 11px; line-height: 1.5; letter-spacing: .08em; text-transform: uppercase; }
-.wide { font-family: var(--display); font-stretch: 125%; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; line-height: .86; }
 
 .sheet { position: sticky; top: var(--stick, 0px); min-height: 100svh; padding: calc(var(--gutter) + 64px) var(--gutter) calc(var(--gutter) + 92px); overflow: hidden; isolation: isolate; box-shadow: 0 -24px 60px rgba(4, 14, 40, .32); }
 .sheet--blue { background-color: var(--blue); color: var(--paper); --rule: var(--line-on-blue); }
@@ -189,7 +197,7 @@ button, input, textarea { font: inherit; color: inherit; }
 .step:last-child { padding-bottom: 0; }
 .is-open .step { opacity: 1; transform: none; transition-delay: calc(var(--i) * 90ms + .2s); }
 .step-no { padding-top: 12px; opacity: .55; }
-.step-box { position: relative; display: block; padding: 10px 14px; border: 1px solid rgba(237, 240, 242, .6); background: var(--blue); }
+.step-box { position: relative; display: block; transition: background .35s var(--ease), color .35s var(--ease), border-color .35s; padding: 10px 14px; border: 1px solid rgba(237, 240, 242, .6); background: var(--blue); }
 .step-box b { display: block; font: 600 15px/1.3 var(--body); }
 .step-box small { display: block; margin-top: 3px; font: 400 11px/1.4 var(--mono); letter-spacing: .04em; opacity: .7; }
 /* Connector: a short line and arrowhead from each box to the next. */
@@ -197,7 +205,6 @@ button, input, textarea { font: inherit; color: inherit; }
 .step:not(:last-child)::after { content: ""; position: absolute; left: calc(34px + 18px); bottom: 0; border: 4px solid transparent; border-top: 6px solid rgba(237, 240, 242, .8); border-bottom: 0; }
 .step--accent .step-box { border-color: var(--red); box-shadow: 4px 4px 0 var(--red); }
 .flow-wrap { position: relative; }
-.step-box { transition: background .35s var(--ease), color .35s var(--ease), border-color .35s; }
 .is-running .step:not(.is-active):not(.is-passed) .step-box { opacity: .55; }
 .step.is-active .step-box { background: var(--red); border-color: var(--red); color: #fff; }
 .step.is-active .step-box small { opacity: .9; }
