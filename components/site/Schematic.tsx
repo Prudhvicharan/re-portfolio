@@ -36,6 +36,7 @@ export default function Schematic({ no, host, sample, flow, active }: { no: numb
       <span>Detail {label} · System schematic</span>
       <span>{host}</span>
     </figcaption>
+    <ol className="flow-compact" aria-label="System flow">{flow.map(s => <li key={s.label} className={s.accent ? "is-key" : undefined}>{s.label}</li>)}</ol>
     <div className="run-bar">
       <p className="run-log" role="status" aria-live="polite">{log}</p>
       <button type="button" className="run-btn" onClick={() => setAt(0)} disabled={running}>
