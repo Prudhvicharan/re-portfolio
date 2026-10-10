@@ -13,14 +13,10 @@ export const SHEETS = [
 
 export const RESUME = "/assets/resume.pdf";
 
-export default function Nav() {
-  const [current, setCurrent] = useState<string>("cover");
-  const [measuring, setMeasuring] = useState(false);
-  useEffect(() => {
-    const sync = (e: Event) => setMeasuring((e as CustomEvent<boolean>).detail);
-    window.addEventListener("measure:state", sync);
-    return () => window.removeEventListener("measure:state", sync);
-  }, []);
+/** The sheet currently under the reading line, plus overall scroll progress (0–1). */
+export function useCurrentSheet() {
+  const [current, setCurrent] = useState<string>(SHEETS[0].id);
+  const [progress, setProgress] = useState(0);
   useEffect(() => {
     let frame = 0;
     const update = () => {
@@ -32,11 +28,25 @@ export default function Nav() {
         if (anchor && anchor.offsetTop <= line) id = sheet.id;
       }
       setCurrent(prev => (prev === id ? prev : id));
+      const max = document.documentElement.scrollHeight - innerHeight;
+      setProgress(max > 0 ? Math.min(1, scrollY / max) : 0);
     };
     const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
     update();
     addEventListener("scroll", onScroll, { passive: true });
-    return () => { removeEventListener("scroll", onScroll); cancelAnimationFrame(frame); };
+    addEventListener("resize", onScroll);
+    return () => { removeEventListener("scroll", onScroll); removeEventListener("resize", onScroll); cancelAnimationFrame(frame); };
+  }, []);
+  return { current, progress };
+}
+
+export default function Nav() {
+  const { current } = useCurrentSheet();
+  const [measuring, setMeasuring] = useState(false);
+  useEffect(() => {
+    const sync = (e: Event) => setMeasuring((e as CustomEvent<boolean>).detail);
+    window.addEventListener("measure:state", sync);
+    return () => window.removeEventListener("measure:state", sync);
   }, []);
 
   return <header className="nav">

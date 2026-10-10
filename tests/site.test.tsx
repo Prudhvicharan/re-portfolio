@@ -72,3 +72,19 @@ describe("Nav", () => {
     expect(screen.getByRole("link", { name: /Résumé/ })).toHaveAttribute("href", RESUME);
   });
 });
+
+describe("SheetTab", () => {
+  it("opens the sheet index and closes it when a sheet is chosen", async () => {
+    const { default: SheetTab } = await import("@/components/site/SheetTab");
+    render(<SheetTab />);
+    const user = userEvent.setup();
+    const pill = screen.getByRole("button", { name: /open the sheet index/ });
+    expect(pill).toHaveAttribute("aria-expanded", "false");
+    await user.click(pill);
+    expect(pill).toHaveAttribute("aria-expanded", "true");
+    const link = screen.getByRole("link", { name: /Work/ });
+    expect(link).toHaveAttribute("href", "#work");
+    await user.click(link);
+    expect(pill).toHaveAttribute("aria-expanded", "false");
+  });
+});
