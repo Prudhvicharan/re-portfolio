@@ -345,7 +345,9 @@ body { margin: 0; color: var(--paper); background: var(--blue); font: 400 16px/1
   .title-block > div { min-width: 0; padding: 7px 9px; }
   .cover { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto; }
   .cover h1 { font-size: 12.6vw; }
-  .portrait { grid-column: 1; grid-row: 2; min-height: 0; aspect-ratio: 1; margin: 18px -8px 0; }
+  /* Explicit square from the viewport width: older iOS Safari resolves aspect-ratio on a
+     stretched grid item from its (unsettled) height and collapses the box. */
+  .portrait { grid-column: 1; grid-row: 2; align-self: start; min-height: 0; width: calc(100% + 16px); height: min(calc(100vw - 2 * var(--gutter) + 16px), 560px); margin: 18px -8px 0; }
   .cover-text { grid-row: 3; padding-top: 6px; }
   .fig-b { display: none; }
   .profile, .contact-grid, .role, .why-body { grid-template-columns: minmax(0, 1fr); }
