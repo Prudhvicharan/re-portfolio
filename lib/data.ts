@@ -95,7 +95,7 @@ export const projects = [
     "tagline": "College Application Management Platform",
     "problem": "Students need searchable institution data and a structured way to manage college applications.",
     "role": "Developed a full-stack platform with external REST API integrations, filtering, pagination, Redis caching, and Python normalization and import scripts. Built a Node.js/Express backend with T-SQL/SQL schema-driven modeling.",
-    "outcome": "1,200+ students and data for 7,000+ institutions; backend supporting 500+ concurrent users at 99.5% uptime; 85% test coverage.",
+    "outcome": "1,200+ students and data for 5,000+ US colleges; backend supporting 500+ concurrent users at 99.5% uptime; 85% test coverage.",
     "stack": [
       "Python",
       "Angular",

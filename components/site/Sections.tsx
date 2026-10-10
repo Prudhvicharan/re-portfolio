@@ -152,7 +152,6 @@ export function ContactSheet() {
     <Contact />
     <footer className="colophon mono">
       <span>© {new Date().getFullYear()} {personal.name}</span>
-      <span>Set in Archivo, Geist and JetBrains Mono</span>
       <a href="#cover">Back to the cover ↑</a>
     </footer>
   </Sheet>;
