@@ -5,6 +5,7 @@ import Portrait from "./Portrait";
 import Clock from "./Clock";
 import Contact from "./Contact";
 import Register from "./Register";
+import PlotTitle from "./PlotTitle";
 import { RESUME } from "./Nav";
 
 const hntb = experience[0];
@@ -48,7 +49,7 @@ export function Profile() {
     { text: `${ms.shortDegree}, ${ms.institution}`, small: `GPA ${ms.gpa} · ${ms.period}` },
   ];
   return <Sheet id="profile" no="A-02" title="Profile" tone="paper">
-    <div className="sheet-head"><h2 id="profile-title">Profile</h2><p className="mono">General arrangement · read before the details</p></div>
+    <div className="sheet-head"><PlotTitle id="profile-title">Profile</PlotTitle><p className="mono">General arrangement · read before the details</p></div>
     <div className="profile">
       <p className="statement">{STATEMENT.split(" ").map((w, i) => <span key={i} className="w">{w} </span>)}<em className="w">trusted.</em></p>
       <div className="notes reveal">
@@ -56,12 +57,28 @@ export function Profile() {
         <ol>{notes.map((n, i) => <li key={n.text}><span>{String(i + 1).padStart(2, "0")}</span><span>{n.text}<small>{n.small}</small></span></li>)}</ol>
       </div>
     </div>
+    <section className="why reveal" aria-labelledby="why-title">
+      <h3 id="why-title" className="mono">Drawing notes · Why this site is a drawing set</h3>
+      <div className="why-body">
+        <p className="why-lead">Before anything gets built at an engineering firm, it gets drawn.</p>
+        <div className="why-text">
+          <p>I work at HNTB, where bridges, highways and transit systems start as sets of drawings: numbered sheets, checked, marked up in red and stamped before anything is built. My part of that world sits a layer down, in the data. Schemas, pipelines and stored procedures have to be designed just as carefully before they run.</p>
+          <p>So this portfolio is built the same way, printed in cyanotype blue, the original blueprint. Each section is a sheet. The schematics show how each project is wired, not just how it looks. And the stamp at the end is yours to give.</p>
+        </div>
+        <dl className="legend">
+          <div><dt><span className="lg lg-sheet" aria-hidden="true" />Sheet</dt><dd>One part of the story, numbered A-01 to A-06</dd></div>
+          <div><dt><span className="lg lg-red" aria-hidden="true" />Red markup</dt><dd>Where a decision was made, or a result landed</dd></div>
+          <div><dt><span className="lg lg-flow" aria-hidden="true" />Schematic</dt><dd>How a system is wired. Press Run to watch it work</dd></div>
+          <div><dt><span className="lg lg-stamp" aria-hidden="true" />Stamp</dt><dd>Approval. You’ll find it on the last sheet</dd></div>
+        </dl>
+      </div>
+    </section>
   </Sheet>;
 }
 
 export function Work() {
   return <Sheet id="work" no="A-03" title="Drawing register" tone="blue">
-    <div className="sheet-head"><h2 id="work-title">Work</h2><p>Four things I designed and shipped. Open one to see how the system fits together.</p></div>
+    <div className="sheet-head"><PlotTitle id="work-title">Work</PlotTitle><p>Four things I designed and shipped. Open one to see how the system fits together.</p></div>
     <Register />
   </Sheet>;
 }
@@ -85,7 +102,7 @@ export function Experience() {
     ...experience.map(e => ({ label: `${e.company} · ${e.role}`, period: e.period, kind: "work" as const })),
   ].map(r => ({ ...r, ...span(r.period) })).sort((a, b) => a.from - b.from);
   return <Sheet id="experience" no="A-04" title="Experience" tone="paper">
-    <div className="sheet-head"><h2 id="experience-title">Experience</h2><p>Dimension lines show time on the job. Red is industry, ink is study.</p></div>
+    <div className="sheet-head"><PlotTitle id="experience-title">Experience</PlotTitle><p>Dimension lines show time on the job. Red is industry, ink is study.</p></div>
     <div className="chart" aria-hidden="true">
       <div className="chart-rows">
         {rows.map(r => <div key={r.label} className={`span${r.kind === "work" ? " span--work" : ""}${r.open ? " span--now" : ""}`} style={{ "--from": `${r.from}%`, "--len": `${r.len}%` } as React.CSSProperties}>
@@ -119,7 +136,7 @@ export function Experience() {
 export function Materials() {
   let item = 0;
   return <Sheet id="materials" no="A-05" title="Bill of materials" tone="blue">
-    <div className="sheet-head"><h2 id="materials-title">Materials</h2><p>Bill of materials: what I build with, grouped the way I use it.</p></div>
+    <div className="sheet-head"><PlotTitle id="materials-title">Materials</PlotTitle><p>Bill of materials: what I build with, grouped the way I use it.</p></div>
     <div className="bom">
       {Object.entries(skills).map(([group, items]) => <section className="bom-group reveal" key={group} aria-label={group}>
         <h3>{group}<span>{items.length} items</span></h3>

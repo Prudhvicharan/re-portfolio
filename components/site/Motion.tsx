@@ -86,7 +86,7 @@ export default function Motion() {
         // Experience: dimension lines extend from their start dates.
         gsap.fromTo(".span-bar", { scaleX: 0 }, { scaleX: 1, duration: 1, stagger: .09, ease: "power3.out", scrollTrigger: { trigger: ".chart", start: "top 75%" } });
         // Big headings rise in as each sheet arrives.
-        gsap.utils.toArray<HTMLElement>(".sheet-head h2, .contact-big").forEach(h => {
+        gsap.utils.toArray<HTMLElement>(".contact-big").forEach(h => {
           gsap.fromTo(h, { yPercent: 18, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: h, start: "top 85%" } });
         });
       });

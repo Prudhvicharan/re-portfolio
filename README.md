@@ -36,4 +36,4 @@ Interaction tests mock EmailJS and use jsdom; they do not send email or certify 
 
 `npm run build` writes the static site to `out/`, including robots.txt, sitemap.xml, canonical metadata and the social preview. `npm run deploy` builds and publishes that directory to the gh-pages branch; run it only when ready to publish. Next.js server-only features are not used for this static site.
 
-The social preview is `public/social-preview.png`. Its reproducible SVG-to-PNG generator is `scripts/generate-social-preview.mjs` (uses the sharp dependency supplied with Next.js).
+The social preview, `public/social-preview.png`, is a 1200×630 capture of the cover sheet. The site icon is `app/icon.svg`, with `app/apple-icon.png` rendered from it.

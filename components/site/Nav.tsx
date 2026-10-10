@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { FileText, Ruler } from "lucide-react";
+import { FileText } from "lucide-react";
 
 export const SHEETS = [
   { id: "cover", no: "A-01", label: "Cover" },
@@ -42,12 +42,6 @@ export function useCurrentSheet() {
 
 export default function Nav() {
   const { current } = useCurrentSheet();
-  const [measuring, setMeasuring] = useState(false);
-  useEffect(() => {
-    const sync = (e: Event) => setMeasuring((e as CustomEvent<boolean>).detail);
-    window.addEventListener("measure:state", sync);
-    return () => window.removeEventListener("measure:state", sync);
-  }, []);
 
   return <header className="nav">
     <a href="#cover" className="nav-mark" aria-label="Prudhvi Charan, back to the cover"><b>P.CHARAN</b><span>Drawing set · 2026</span></a>
@@ -56,7 +50,6 @@ export default function Nav() {
         {SHEETS.map(s => <li key={s.id}><a href={`#${s.id}`} aria-current={current === s.id ? "true" : undefined}><i>{s.no}</i><span>{s.label}</span></a></li>)}
       </ol>
     </nav>
-    <button type="button" className="nav-measure" aria-pressed={measuring} onClick={() => window.dispatchEvent(new Event("measure:toggle"))} title="Measure tool (M)"><Ruler size={15} aria-hidden="true" /><span>Measure</span></button>
     <a className="nav-resume" href={RESUME} target="_blank" rel="noopener noreferrer"><FileText size={14} aria-hidden="true" />Résumé</a>
   </header>;
 }

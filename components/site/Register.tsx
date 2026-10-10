@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ArrowUpRight, Github, Plus } from "lucide-react";
 import { projects } from "@/lib/data";
 import { work } from "@/lib/work";
+import Schematic from "./Schematic";
 
 // Drawing register: one row per project; opening a row unfolds its detail drawing.
 export default function Register() {
@@ -45,15 +46,7 @@ export default function Register() {
                   <a className="btn btn--ghost" href={p.github} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} source on GitHub`}><Github size={16} aria-hidden="true" />Source</a>
                 </div>
               </div>
-              <figure className="schematic">
-                <figcaption className="mono"><span>Detail {String(i + 1).padStart(2, "0")} · System schematic</span><span>{w.host}</span></figcaption>
-                <ol className="flow">
-                  {w.flow.map((s, k) => <li key={s.label} className={`step${s.accent ? " step--accent" : ""}`} style={{ "--i": k } as React.CSSProperties}>
-                    <span className="step-no mono">{String(k + 1).padStart(2, "0")}</span>
-                    <span className="step-box"><b>{s.label}</b>{s.note && <small>{s.note}</small>}</span>
-                  </li>)}
-                </ol>
-              </figure>
+              <Schematic no={i + 1} host={w.host} sample={w.sample} flow={w.flow} active={isOpen} />
             </div>
           </div>
         </div>
