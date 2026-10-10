@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- "P." from the P.CHARAN wordmark: a drafted P and the red markup dot, on cyanotype blue. -->
+  <rect width="64" height="64" rx="12" fill="#123a86"/>
+  <path d="M8 12V8h4M56 52v4h-4" fill="none" stroke="#edf0f2" stroke-opacity=".45" stroke-width="2"/>
+  <path d="M20 50V14h13.5a10.5 10.5 0 0 1 0 21H20" fill="none" stroke="#edf0f2" stroke-width="8" stroke-linejoin="miter"/>
+  <rect x="40" y="42" width="8" height="8" fill="#ff4a2e"/>
+</svg>
