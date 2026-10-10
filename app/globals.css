@@ -360,7 +360,13 @@ button, input, textarea { font: inherit; color: inherit; }
   .flow-compact li + li::before { content: "→"; color: var(--red); }
   .flow-compact .is-key { color: var(--red); }
   .detail dl > div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
-  .chart { display: none; }
+  /* Timeline on phones: label on its own line, dimension line beneath, every other year on the axis. */
+  .chart-rows { gap: 18px; }
+  .span { height: auto; padding-bottom: 16px; }
+  .span-label, .span-label[style] { position: static; display: block; white-space: normal; font-size: 10px; line-height: 1.4; }
+  .span-bar { top: auto; bottom: 4px; }
+  .chart-axis span:nth-child(even) { color: transparent; }
+  .chart-axis span { padding-left: 3px; font-size: 9px; }
   .bom { grid-template-columns: 1fr; }
   .rfi-row { grid-template-columns: 1fr; }
   .rfi-row .field + .field { border-left: 0; }
